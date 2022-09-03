@@ -2,18 +2,18 @@ from versatileimagefield.fields import VersatileImageField, PPOIField
 import os
 import uuid
 from django.db import models
-from auth_user.models import User
 from core.models import BaseModel
 from django.utils.text import slugify
 from smartfields import fields
 from smartfields.dependencies import Dependency
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
+from category.models import Category
+from brand.models import Brand
 
 
 def get_product_name(value, instance, **kwargs):
     return "{}-{}".format(instance.product_name, str(instance.category.id))
-
 
 
 def rename_path_and_save_product(path):
@@ -38,8 +38,6 @@ product_image_upload_path = rename_path_and_save_product("product_images/")
 product_image_upload_path.__qualname__ = "product_image_upload_path"
 
 
-
-
 class Product(BaseModel):
     product_name = models.CharField(max_length=255)
     slug = fields.SlugField(
@@ -49,6 +47,7 @@ class Product(BaseModel):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="products"
     )
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name="products")
     product_detail = RichTextField()
     product_url = models.URLField(max_length=255)
     product_mrp = models.DecimalField(max_digits=10, decimal_places=2)

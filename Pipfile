@@ -7,6 +7,10 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 pillow = "*"
+django-smartfields = "*"
+django-versatileimagefield = "*"
+django-ckeditor = "*"
+sentry-sdk = "*"
 
 [dev-packages]
 

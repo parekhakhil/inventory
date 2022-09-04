@@ -7,10 +7,15 @@ from django.utils.text import slugify
 from versatileimagefield.fields import VersatileImageField, PPOIField
 import os
 import uuid
+from django.urls import reverse
+from .managers import CategoryManager
+
 # Create your models here.
+
 
 def get_category_name(value, instance, **kwargs):
     return instance.category_name
+
 
 def rename_path_and_save_category(path):
     def wrapper(instance, filename):
@@ -47,8 +52,23 @@ class Category(BaseModel):
     )
     image_ppoi = PPOIField()
 
+    object = CategoryManager()
+
     def __str__(self):
         return self.category_name
+
+    def get_absolute_url(self):
+        return reverse("category_detail", kwargs={"slug": self.slug})
+
+    def get_update_url(self):
+        return reverse("category_update", kwargs={"slug": self.slug})
+
+    def get_delete_url(self):
+        return reverse("category_delete", kwargs={"slug": self.slug})
+
+    def deactivate(self):
+        self.is_deleted = True
+        self.save(update_fields=["is_deleted"])
 
     class Meta:
         verbose_name = "Category"

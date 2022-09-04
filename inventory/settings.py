@@ -15,6 +15,11 @@ import os
 import sentry_sdk
 from datetime import timedelta
 from sentry_sdk.integrations.django import DjangoIntegration
+import environ
+
+env = environ.Env()
+
+environ.Env.read_env()
 
 sentry_sdk.init(
     dsn="https://b09cbc5561264c028a49c72b3ce3ac21@o280137.ingest.sentry.io/6714769",
@@ -38,7 +43,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-mc*g!hd83l)5f_n5ao7yq+#4yc448u6(&v(3^j8-3=21wr$wc6"
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

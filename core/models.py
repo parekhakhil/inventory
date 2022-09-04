@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+
 # Create your models here.
 
 
@@ -15,7 +16,7 @@ class BaseModel(models.Model):
         abstract = True
 
     def __repr__(self):
-        return f'{self.__class__.__name__}'
+        return f"{self.__class__.__name__}"
 
     def __str__(self):
-        return f'{self.__class__.__name__}'
+        return f"{self.__class__.__name__}"

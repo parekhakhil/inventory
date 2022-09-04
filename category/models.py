@@ -52,7 +52,7 @@ class Category(BaseModel):
     )
     image_ppoi = PPOIField()
 
-    object = CategoryManager()
+    objects = CategoryManager()
 
     def __str__(self):
         return self.category_name

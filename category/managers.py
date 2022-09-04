@@ -10,4 +10,9 @@ class CategoryManager(models.Manager):
         return self.annotate(num_responses=Coalesce(models.Count("response"), 0))
 
     def active(self):
-        return super(CategoryManager,self).get_queryset().filter(is_deleted=False).order_by('created_at')
+        return (
+            super(CategoryManager, self)
+            .get_queryset()
+            .filter(is_deleted=False)
+            .order_by("created_at")
+        )

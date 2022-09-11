@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Brand List{% endblock head_title %}
+
+{% block content %}
+
+{% for brand in brand_list %}
+
+{{brand.brand_name}}
+{{brand.description}}
+<a href={{brand.get_absolute_url}}>CLick here</a>
+{{total}}
+
+{% endfor %}
+{% endblock content %}

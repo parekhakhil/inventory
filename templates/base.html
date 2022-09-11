@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block head_title %}{% endblock %} | Inventory Management</title>
+    <!-- Compiled and minified CSS -->
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    {# block to easily inject any content in head #}
+    {% block extra_head %}
+
+    {% endblock %}
+    <style type="text/css">
+      .btn{
+        border-radius: 7px;
+      }
+      form{
+        border-radius: 15px;
+      }
+      </style>
+  </head>
+  <body>
+    <header>
+    {# include navbar #}
+    {% include "_navbar.html" %}
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+
+
+    {# include footer #}
+    {% include "_footer.html" %}
+    <!-- start javascript inclusions -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script> {% endcomment %}
+    <script type="text/javascript" src="{% static 'css/csrf.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".dropdown-button").dropdown();
+    });
+    </script>
+
+<!-- alerts -->
+    {% if messages %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                {% for message in messages %}
+                    Materialize.toast('{{ message }}', 5000, '{{ message.tags }}');
+                {% endfor %}
+            });
+        </script>
+    {% endif %}
+<!-- end alerts -->
+
+{# block to easily inject any javascript content #}
+{% block extra_scripts %}
+{% endblock %}
+<!-- end javascript inclusions -->
+</body>
+</html>

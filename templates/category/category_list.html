@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Category List{% endblock head_title %}
+
+{% block content %}
+
+{% for category in category_list %}
+
+{{category.category_name}}
+{{category.description}}
+<a href={{category.get_absolute_url}}>CLick here</a>
+{{total}}
+
+{% endfor %}
+{% endblock content %}

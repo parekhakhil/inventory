@@ -58,7 +58,7 @@ class Category(BaseModel):
         return self.category_name
 
     def get_absolute_url(self):
-        return reverse("category_detail", kwargs={"slug": self.slug})
+        return reverse("backend:category:category_detail", kwargs={"slug": self.slug})
 
     def get_update_url(self):
         return reverse("category_update", kwargs={"slug": self.slug})
